@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Nammu ❤️</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff5f8d,#ffc3d9);
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
+
+.page{
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  padding:20px;
+}
+
+.page.active{display:flex;}
+
+button{
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  font-size:1rem;
+  cursor:pointer;
+  margin:10px;
+}
+
+#bf{
+  background:#ff2e63;
+  color:white;
+  box-shadow:0 0 15px #ff2e63;
+}
+
+#dad{
+  background:#333;
+  color:#aaa;
+  position:absolute;
+}
+
+.shayari{
+  max-width:750px;
+  background:rgba(0,0,0,0.3);
+  padding:25px;
+  border-radius:20px;
+  line-height:1.6;
+  font-size:1.05rem;
+}
+
+.next{
+  margin-top:20px;
+  background:#ff2e63;
+  color:white;
+}
+
+/* Roses */
+.roses{
+  display:flex;
+  gap:30px;
+  margin-top:20px;
+}
+.rose{
+  font-size:4rem;
+  cursor:pointer;
+}
+
+/* Falling petals */
+.petal{
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC (plays after boyfriend click) -->
+<audio id="bgMusic" src="music/satranga.mp3" loop></audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h1>Who loves you more? ❤️</h1>
+  <button id="bf" onclick="goPage(2)">Your Boyfriend</button>
+  <button id="dad">Your Dad</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <h1>For You, Nammu 🌹</h1>
+
+  <div class="shayari">
+Talash karogi tao koi aur mil jayega,<br>
+Par mujhe sa chahega kaun?<br>
+Chahaton se dekhega zarur zamana tumhe,<br>
+Par wo aankhein mujhe sa layega kaise…<br><br>
+
+Jo khamoshi samajh le bina kahe,<br>
+Jo har dard pe pehle tera naam bulaye,<br>
+Jo tumhari har jeet ko apni dua banaye ❤️<br>
+Aur har mushkil se tumhe bachaye.<br><br>
+
+Zamana mohabbat ka daam lagayega,<br>
+Par meri tarah khud ko kaun lutayega?<br>
+Mil jayenge chehre hazaar tumhe,<br>
+Par meri rooh sa ishq kaun nibhayega?<br><br>
+
+Talash karogi tao mil jayegaaa koiii 🫠
+  </div>
+
+  <button class="next" onclick="goPage(3)">Next 🌹</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h1>If you love me… choose the RIGHT rose 🌸</h1>
+
+  <div class="roses">
+    <div class="rose" onclick="wrong()">🌹</div>
+    <div class="rose" onclick="right()">🌸</div>
+    <div class="rose" onclick="wrong()">🌺</div>
+  </div>
+
+  <div id="result" style="margin-top:20px;font-size:1.2rem;"></div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <h1>Why I Love You ❤️</h1>
+
+  <div class="shayari">
+Tumhari ek muskaan meri thakaan mita deti hai,<br>
+Tumhari ek baat mera din bana deti hai.<br><br>
+
+Tum saath ho toh har darr chhota lagta hai,<br>
+Aur tum na ho toh sab adhoora lagta hai.<br><br>
+
+Tum sirf meri pasand nahi ho,<br>
+Tum meri aadat, meri zarurat ho.
+  </div>
+
+  <button class="next" onclick="goPage(5)">Next 💖</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+  <h1>Nammu 💕</h1>
+
+  <div class="shayari">
+Yeh sirf Rose Day nahi…<br>
+Yeh meri feelings ka sach hai.<br><br>
+
+Main perfect nahi hoon,<br>
+Par tumhare liye hamesha loyal rahunga.<br><br>
+
+Will you always stay with me? 🌹
+  </div>
+
+  <button class="next" onclick="alert('She said YES 😍')">
+    YES ❤️
+  </button>
+</div>
+
+<script>
+function goPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+
+  // 🎶 Start music ONLY after clicking "Your Boyfriend"
+  if(n === 2){
+    document.getElementById('bgMusic').play();
+    startPetals();
+  }
+}
+
+/* Dad button runs away */
+const dad=document.getElementById('dad');
+dad.addEventListener('mouseover',()=>{
+  dad.style.left=Math.random()*80+'%';
+  dad.style.top=Math.random()*80+'%';
+});
+
+/* Rose game */
+function wrong(){
+  document.getElementById('result').innerHTML="🥺 Tum pyaar nahi karti thi ik…";
+}
+
+function right(){
+  document.getElementById('result').innerHTML="💖 You chose right… I knew it 🌸";
+  setTimeout(()=>goPage(4),1500);
+}
+
+/* Falling rose petals */
+function startPetals(){
+  setInterval(()=>{
+    const petal=document.createElement('div');
+    petal.className='petal';
+    petal.innerHTML='🌹';
+    petal.style.left=Math.random()*100+'vw';
+    petal.style.animationDuration=3+Math.random()*5+'s';
+    document.body.appendChild(petal);
+    setTimeout(()=>petal.remove(),8000);
+  },400);
+}
+</script>
+
+</body>
+</html>
