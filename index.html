@@ -91,7 +91,9 @@ button{
 <body>
 
 <!-- 🎵 MUSIC (plays after boyfriend click) -->
-<audio id="bgMusic" src="music/satranga.mp3" loop></audio>
+
+<audio id="bgMusic" src="music/satranga.mp3" loop playsinline></audio>
+
 
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
@@ -103,6 +105,7 @@ button{
 <!-- PAGE 2 -->
 <div class="page" id="page2">
   <h1>For You, Nammu 🌹</h1>
+  <button class="next" onclick="playMusic()">▶️ Play Music</button>
 
   <div class="shayari">
 Talash karogi tao koi aur mil jayega,<br>
@@ -216,6 +219,10 @@ function startPetals(){
     document.body.appendChild(petal);
     setTimeout(()=>petal.remove(),8000);
   },400);
+}
+</script>
+function playMusic(){
+  document.getElementById("bgMusic").play();
 }
 </script>
 
